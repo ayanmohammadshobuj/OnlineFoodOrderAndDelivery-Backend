@@ -25,6 +25,6 @@ public class Orderitem {
     private Long totalPrice;
 
     // for error
-    @ElementCollection
+//    @ElementCollection
     private List<String> ingredients;
 }
