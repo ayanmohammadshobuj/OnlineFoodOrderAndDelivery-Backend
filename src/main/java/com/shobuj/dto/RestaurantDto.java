@@ -13,7 +13,8 @@ public class RestaurantDto {
 
     private String title;
 
-//    @ElementCollection
+    // for error
+    @ElementCollection
     @Column(length = 1000)
     private List<String> images;
 
