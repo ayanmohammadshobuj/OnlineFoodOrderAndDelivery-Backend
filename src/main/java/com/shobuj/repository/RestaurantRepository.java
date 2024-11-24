@@ -1,4 +1,4 @@
-package com.shobuj.response;
+package com.shobuj.repository;
 
 import com.shobuj.entity.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;

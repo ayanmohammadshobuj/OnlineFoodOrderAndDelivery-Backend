@@ -7,7 +7,7 @@ import com.shobuj.entity.User;
 import com.shobuj.repository.AddressRepository;
 import com.shobuj.repository.UserRepository;
 import com.shobuj.request.CreateRestaurantRequest;
-import com.shobuj.response.RestaurantRepository;
+import com.shobuj.repository.RestaurantRepository;
 import com.shobuj.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
