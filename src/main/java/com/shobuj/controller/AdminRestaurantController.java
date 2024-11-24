@@ -58,7 +58,7 @@ public class AdminRestaurantController {
         return new ResponseEntity<>(restaurant, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/user")
+    @GetMapping("/user")
     public ResponseEntity<Restaurant> findRestaurantByUserId(
                                                              @RequestHeader("Authorization") String jwt
                                                              ) throws Exception {

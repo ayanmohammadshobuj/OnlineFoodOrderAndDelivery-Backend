@@ -28,7 +28,7 @@ public class CartItem {
     private int quantity;
 
     // for error
-    @ElementCollection
+//    @ElementCollection
     private List<String> ingredients;
 
     private Long totalPrice;
