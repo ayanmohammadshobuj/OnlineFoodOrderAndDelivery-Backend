@@ -52,9 +52,11 @@ public class AuthController {
         createdUser.setRole(user.getRole());
         createdUser.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(createdUser);
+
         Cart cart = new Cart();
         cart.setCustomer(savedUser);
         cartRepository.save(cart);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
