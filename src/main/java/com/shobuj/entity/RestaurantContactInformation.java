@@ -1,0 +1,27 @@
+package com.shobuj.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RestaurantContactInformation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String mobile;
+    private String email;
+    private String website;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+}
