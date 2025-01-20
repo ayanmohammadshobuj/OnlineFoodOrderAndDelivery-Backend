@@ -1,5 +1,6 @@
 package com.shobuj.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,20 +12,21 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Orderitem {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int quantity;
+    private double totalPrice;
+
     @ManyToOne
+    @JoinColumn(name = "food_id")
     private Food food;
 
-    private int quantity;
-
-    private Long totalPrice;
-
-    // for error
-//    @ElementCollection
-    private List<String> ingredients;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

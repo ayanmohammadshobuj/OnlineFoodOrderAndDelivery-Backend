@@ -38,6 +38,14 @@ public class AdminRestaurantController {
         return new ResponseEntity<>(restaurant, HttpStatus.CREATED);
     }
 
+    @PutMapping("/jwt")
+    public ResponseEntity<Restaurant> updateRestaurantByJwt(@RequestBody CreateRestaurantRequest req,
+                                                       @RequestHeader("Authorization") String jwt) throws Exception {
+        User user = userService.findUserByJwtToken(jwt);
+        Restaurant restaurant = restaurantService.updateRestaurantByJwt(req, user);
+        return new ResponseEntity<>(restaurant, HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<MessegeResponse> deleteRestaurant(
                                                        @RequestHeader("Authorization") String jwt,
@@ -59,13 +67,20 @@ public class AdminRestaurantController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<Restaurant> findRestaurantByUserId(
-                                                             @RequestHeader("Authorization") String jwt
+    public ResponseEntity<Restaurant> findRestaurantByUserId(@RequestHeader("Authorization") String jwt
                                                              ) throws Exception {
         User user = userService.findUserByJwtToken(jwt);
         Restaurant restaurant = restaurantService.getRestaurantByUserId(user.getId());
         return new ResponseEntity<>(restaurant, HttpStatus.OK);
     }
 
+    // Update Status of all restaurant by openingHours and closingHours automatically
+    @PutMapping("/status")
+    public ResponseEntity<MessegeResponse> updateRestaurantStatusByTime() throws Exception {
+        restaurantService.updateRestaurantStatusByTime();
+        MessegeResponse res = new MessegeResponse();
+        res.setMessage("Restaurant status updated successfully.");
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 
 }

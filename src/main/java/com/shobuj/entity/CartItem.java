@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,17 +17,14 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
-    private Cart cart;
-
-    @ManyToOne
+    @JoinColumn(name = "food_id")
     private Food food;
 
     private int quantity;
+    private double totalPrice;
 
-    // for error
-//    @ElementCollection
-    private List<String> ingredients;
-
-    private Long totalPrice;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 }

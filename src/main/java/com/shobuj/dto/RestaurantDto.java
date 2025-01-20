@@ -1,24 +1,22 @@
 package com.shobuj.dto;
 
+
+
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @Embeddable
 public class RestaurantDto {
-
+    private Long id;
     private String title;
-
-    // for error
-//    @ElementCollection
-    @Column(length = 1000)
-    private List<String> images;
-
+    private String category;
+    private String cuisine;
+    private String status;
     private String description;
 
-    private Long id;
+    @Column(length = 10000000)
+    private byte[] dpImage;
 }

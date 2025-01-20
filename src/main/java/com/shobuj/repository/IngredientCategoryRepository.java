@@ -1,11 +1,11 @@
-package com.shobuj.repository;
+//package com.shobuj.repository;
+//
+//import com.shobuj.entity.IngredientCategory;
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//import java.util.List;
 
-import com.shobuj.entity.IngredientCategory;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
-
-public interface IngredientCategoryRepository extends JpaRepository<IngredientCategory, Long> {
-
-    List<IngredientCategory> findByRestaurantId(Long id);
-}
+//public interface IngredientCategoryRepository extends JpaRepository<IngredientCategory, Long> {
+//
+//    List<IngredientCategory> findByRestaurantId(Long id);
+//}

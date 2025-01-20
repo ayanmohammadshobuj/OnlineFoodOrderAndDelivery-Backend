@@ -1,6 +1,6 @@
 package com.shobuj.response;
 
-import com.shobuj.entity.USER_ROLE;
+import com.shobuj.enums.USER_ROLE;
 import lombok.Data;
 
 @Data

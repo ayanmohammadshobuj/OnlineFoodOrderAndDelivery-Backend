@@ -7,7 +7,9 @@ import com.shobuj.service.CategoryService;
 import com.shobuj.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +23,19 @@ public class CategoryServiceImpl implements CategoryService {
     private RestaurantService restaurantService;
 
     @Override
-    public Category createCategory(String name, Long userId) throws Exception {
+    public Category createCategory(String name, Long userId, MultipartFile image) throws Exception {
         Restaurant restaurant = restaurantService.getRestaurantByUserId(userId);
         Category category = new Category();
         category.setName(name);
         category.setRestaurant(restaurant);
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                category.setImage(image.getBytes());
+            } catch (IOException e) {
+                throw new Exception("Failed to store image", e);
+            }
+        }
 
         return categoryRepository.save(category);
     }
@@ -44,5 +54,30 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return optionalCategory.get();
+    }
+
+    // New
+    @Override
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public Category updateCategory(Long id, String name, MultipartFile image) {
+        Category category = categoryRepository.findById(id).get();
+        category.setName(name);
+        if (image != null && !image.isEmpty()) {
+            try {
+                category.setImage(image.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return categoryRepository.save(category);
     }
 }

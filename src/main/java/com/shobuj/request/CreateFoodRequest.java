@@ -1,23 +1,27 @@
 package com.shobuj.request;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shobuj.entity.Category;
-import com.shobuj.entity.IngredientsItem;
+import com.shobuj.entity.Restaurant;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 public class CreateFoodRequest {
-
     private String name;
     private String description;
-    private Long price;
-
-    private Category category;
+    private long price;
     private List<String> images;
+    private Restaurant restaurant;
+    private Category category;
 
-    private Long restaurantId;
-    private boolean vegetarian;
-    private boolean seasional;
-    private List<IngredientsItem> ingredients;
+    public static CreateFoodRequest fromJson(String json) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, CreateFoodRequest.class);
+    }
+
+    public Long getId() {
+        return null;
+    }
 }

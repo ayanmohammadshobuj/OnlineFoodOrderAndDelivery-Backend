@@ -1,6 +1,6 @@
-package com.shobuj.service;
+package com.shobuj.service.impl;
 
-import com.shobuj.entity.USER_ROLE;
+import com.shobuj.enums.USER_ROLE;
 import com.shobuj.entity.User;
 import com.shobuj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

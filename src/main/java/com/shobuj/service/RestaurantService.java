@@ -27,4 +27,23 @@ public interface RestaurantService {
 
     public Restaurant updateRestaurantStatus(Long id) throws Exception;
 
+    public void removeFromFavorites(Long restaurantId, User user) throws Exception;
+
+    Restaurant updateRestaurantByJwt(CreateRestaurantRequest req, User user);
+
+    List<Restaurant> getRestaurantByCategory(Long id);
+
+    List<Restaurant> getRestaurantByLocation(String city);
+
+    List<Restaurant> getRestaurantByCategoryAndLocation(Long id, String city);
+
+    public void autoUpdateRestaurantTotalRating(Long restaurantId);
+
+    void updateRestaurantStatusByTime();
+
+    public Restaurant findById(Long id);
+
+    Restaurant getRestaurantByFoodId(Long id);
+
+    public List<Restaurant> searchRestaurantByAnything(String keyword);
 }

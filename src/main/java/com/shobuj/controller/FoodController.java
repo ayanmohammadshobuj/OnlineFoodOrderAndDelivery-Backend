@@ -1,10 +1,7 @@
 package com.shobuj.controller;
 
 import com.shobuj.entity.Food;
-import com.shobuj.entity.Restaurant;
 import com.shobuj.entity.User;
-import com.shobuj.request.CreateFoodRequest;
-import com.shobuj.response.MessegeResponse;
 import com.shobuj.service.FoodService;
 import com.shobuj.service.RestaurantService;
 import com.shobuj.service.UserService;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/food")
+@RequestMapping("/anyone/food")
 public class FoodController {
 
     @Autowired
@@ -32,25 +29,30 @@ public class FoodController {
     public ResponseEntity<List<Food>> searchFood(@RequestParam String name,
                                                  @RequestHeader("Authorization") String jwt) throws Exception {
         User user = userService.findUserByJwtToken(jwt);
-
         List<Food> foods = foodService.searchFood(name);
-
         return new ResponseEntity<>(foods, HttpStatus.CREATED);
     }
 
-    @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<Food>> getRestaurantFood(@RequestParam boolean vegetarian,
-                                                        @RequestParam boolean seasonal,
-                                                        @RequestParam boolean nonveg,
-                                                        @RequestParam(required = false) String food_category,
-                                                        @PathVariable Long restaurantId,
-                                                        @RequestHeader("Authorization") String jwt) throws Exception {
-        User user = userService.findUserByJwtToken(jwt);
+    @GetMapping("/{id}")
+    public ResponseEntity<Food> findFoodById(@PathVariable Long id) throws Exception {
+        Food food = foodService.findFoodById(id);
+        return new ResponseEntity<>(food, HttpStatus.OK);
+    }
 
-        List<Food> foods = foodService.getRestaurantFood(restaurantId, vegetarian, vegetarian, seasonal, food_category);
-
+    //Get All Food Items of a Restaurant by Restaurant ID
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<Food>> getAllFoodItems(@PathVariable Long id) throws Exception {
+        List<Food> foods = foodService.getAllFoodItems(id);
         return new ResponseEntity<>(foods, HttpStatus.OK);
     }
+
+    // Get All Food By Category ID
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Food>> getAllFoodByCategory(@PathVariable Long id) throws Exception {
+        List<Food> foods = foodService.getAllFoodByCategory(id);
+        return new ResponseEntity<>(foods, HttpStatus.OK);
+    }
+
 
 
 }

@@ -1,6 +1,5 @@
 package com.shobuj.request;
 
-
 import lombok.Data;
 
 @Data
